@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectModels", "ProjectModels\ProjectModels.csproj", "{27ED3DF7-F79B-4630-951C-6B292B0E130C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectConsole", "ProjectConsole\ProjectConsole.csproj", "{83ADE64F-7A96-45BD-BC9F-533C6857B719}"
+	ProjectSection(ProjectDependencies) = postProject
+		{27ED3DF7-F79B-4630-951C-6B292B0E130C} = {27ED3DF7-F79B-4630-951C-6B292B0E130C}
+		{ADB6249D-2B8C-42AB-A661-CA62E4C48533} = {ADB6249D-2B8C-42AB-A661-CA62E4C48533}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

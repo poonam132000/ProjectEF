@@ -13,4 +13,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectDataAccess\ProjectDataAccess.csproj" />
+    <ProjectReference Include="..\ProjectModels\ProjectModels.csproj" />
+  </ItemGroup>
+
 </Project>

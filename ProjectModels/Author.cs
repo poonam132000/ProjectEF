@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectModels.Models;
 
 namespace ProjectModels
 {
@@ -23,6 +24,10 @@ namespace ProjectModels
         public string BirthDate { get; set; }
 
         public string Location { get; set; }
+
+        public List <Book> Books { get; set; }
+
+        
 
         [NotMapped]
         public string FullName { 

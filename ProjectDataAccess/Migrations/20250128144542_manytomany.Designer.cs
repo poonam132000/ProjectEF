@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjectDataAccess.Data;
 
@@ -10,9 +11,11 @@ using ProjectDataAccess.Data;
 namespace ProjectDataAccess.Migrations
 {
     [DbContext(typeof(AddDBContext))]
-    partial class AddDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250128144542_manytomany")]
+    partial class manytomany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +24,7 @@ namespace ProjectDataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BookFluent_Author", b =>
+            modelBuilder.Entity("AuthorBook", b =>
                 {
                     b.Property<int>("AuthorsAuthor_Id")
                         .HasColumnType("int");
@@ -33,58 +36,10 @@ namespace ProjectDataAccess.Migrations
 
                     b.HasIndex("BooksBookId");
 
-                    b.ToTable("BookFluent_Author");
+                    b.ToTable("AuthorBook");
                 });
 
-            modelBuilder.Entity("ProjectModels.FluentAuthor", b =>
-                {
-                    b.Property<int>("Author_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Author_Id"));
-
-                    b.Property<string>("BirthDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("LastName")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Author_Id");
-
-                    b.ToTable("FluentAuthors", (string)null);
-                });
-
-            modelBuilder.Entity("ProjectModels.FluentPublisher", b =>
-                {
-                    b.Property<int>("Publisher_Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Publisher_Id"));
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Publisher_Id");
-
-                    b.ToTable("FluentPublishers", (string)null);
-                });
-
-            modelBuilder.Entity("ProjectModels.Fluent_Author", b =>
+            modelBuilder.Entity("ProjectModels.Author", b =>
                 {
                     b.Property<int>("Author_Id")
                         .ValueGeneratedOnAdd()
@@ -180,6 +135,27 @@ namespace ProjectDataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("ProjectModels.Publisher", b =>
+                {
+                    b.Property<int>("Publisher_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Publisher_Id"));
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Publisher_Id");
+
+                    b.ToTable("Publishers");
+                });
+
             modelBuilder.Entity("ProjectModels.SubCategory", b =>
                 {
                     b.Property<int>("SubCategory_Id")
@@ -198,9 +174,9 @@ namespace ProjectDataAccess.Migrations
                     b.ToTable("SubCategories");
                 });
 
-            modelBuilder.Entity("BookFluent_Author", b =>
+            modelBuilder.Entity("AuthorBook", b =>
                 {
-                    b.HasOne("ProjectModels.Fluent_Author", null)
+                    b.HasOne("ProjectModels.Author", null)
                         .WithMany()
                         .HasForeignKey("AuthorsAuthor_Id")
                         .OnDelete(DeleteBehavior.Cascade)
